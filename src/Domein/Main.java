@@ -31,7 +31,7 @@ public class Main {
         try {
             connection.close();
         } catch (SQLException e) {
-            System.out.println("Het sluiten van de connectie met de database is mislukt");
+            System.out.println("Het sluiten van de connectie met de database is misluk");
         }
     }
 
