@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Main {
 
-    public static Connection connection;
+    private static Connection connection;
 
     public static void main(String[] args) throws SQLException {
         getConnection();
@@ -18,7 +18,7 @@ public class Main {
         closeConnection();
     }
 
-    public static void getConnection() {
+    private static void getConnection() {
         try{
             connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/ovchip","postgres","Linde10");
 
@@ -27,7 +27,7 @@ public class Main {
         }
     }
 
-    public static void closeConnection() {
+    private static void closeConnection() {
         try {
             connection.close();
         } catch (SQLException e) {
