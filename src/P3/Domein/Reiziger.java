@@ -1,4 +1,4 @@
-package Domein;
+package P3.Domein;
 
 import java.util.Date;
 
@@ -9,6 +9,8 @@ public class Reiziger {
     private String tussenvoegsel;
     private String achternaam;
     private Date geboortedatum;
+
+    private Adres adres;
 
     public Reiziger(int reiziger_id, String voorletters, String tussenvoegsel, String achternaam, Date geboortedatum){
         this.reiziger_id = reiziger_id;
@@ -58,8 +60,20 @@ public class Reiziger {
         this.geboortedatum = geboortedatum;
     }
 
+    public Adres getAdres(){
+        return adres;
+    }
+    public void setAdres(Adres adres) {
+        this.adres = adres;
+    }
+
     public String toString(){
-        String s  = "#" + getReiziger_id() + ": " + getVoorletters() + ". " + (getTussenvoegsel() == null ? "" : getTussenvoegsel()  + " ") + getAchternaam() + " (" + getGeboortedatum() + ")";
+        String s = String.format("Reiziger {#%s: %s. %s %s (%s)} %s ", reiziger_id,voorletters,tussenvoegsel == null ? "" : tussenvoegsel,achternaam,geboortedatum, adres == null ? "" : adres.adresString());
+        return s;
+    }
+
+    public String reizigerString(){
+        String s = String.format("Reiziger {#%s: %s. %s %s (%s)}", reiziger_id,voorletters,tussenvoegsel == null ? "" : tussenvoegsel,achternaam,geboortedatum) ;
         return s;
     }
 }

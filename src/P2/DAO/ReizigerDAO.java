@@ -1,6 +1,6 @@
-package DAO;
+package P2.DAO;
 
-import Domein.Reiziger;
+import P2.Domein.Reiziger;
 
 import java.util.List;
 

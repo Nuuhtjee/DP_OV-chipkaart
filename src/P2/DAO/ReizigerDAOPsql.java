@@ -1,14 +1,12 @@
-package DAO;
+package P2.DAO;
 
-import Domein.Main;
-import Domein.Reiziger;
+import P2.Domein.Reiziger;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReizigerDAOPsql implements ReizigerDAO {
-
 
     private Connection conn;
 
@@ -90,7 +88,7 @@ public class ReizigerDAOPsql implements ReizigerDAO {
         List<Reiziger> reizigers = new ArrayList<>();
         try {
             PreparedStatement pst = conn.prepareStatement(query);
-            pst.setDate(1,java.sql.Date.valueOf(datum));
+            pst.setDate(1, Date.valueOf(datum));
             ResultSet rs = pst.executeQuery();
             while (rs.next()){
                 reizigers.add(new Reiziger(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getDate(5)));
