@@ -7,7 +7,7 @@ public class Adres {
     private String huisnummer;
     private String straat;
     private String woonplaats;
-    private int reiziger_id;
+//    private int reiziger_id;
 
 
     private Reiziger reiziger;
@@ -19,7 +19,7 @@ public class Adres {
         this.straat = straat;
         this.woonplaats = woonplaats;
         this.reiziger = reiziger;
-        this.reiziger_id = reiziger.getReiziger_id();
+//        this.reiziger_id = reiziger.getReiziger_id();
         reiziger.setAdres(this);
     }
 

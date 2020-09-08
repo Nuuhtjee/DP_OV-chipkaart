@@ -78,6 +78,29 @@ public class AdresDAOPsql implements AdresDAO{
         return result;
     }
 
+    //Voor feedback op canvas
+
+//    @Override
+//    public Adres findByReiziger(Reiziger reiziger) {
+//        String query = "Select * from adres where reiziger_id = ?";
+//        Adres adres = null;
+//        try {
+//            PreparedStatement pst = conn.prepareStatement(query);
+//            pst.setInt(1,reiziger.getReiziger_id());
+//            ResultSet rs = pst.executeQuery();
+//            while(rs.next()){
+//                adres = new Adres(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rdao.findById(rs.getInt(6)));
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return adres;
+//    }
+
+    //Na feedback op canvas
+
+    //Sinds je de Adres zoekt gebaseert op de reiziger_id kun je gewoon de reiziger uit de parameter pakken inplaats van rdao.findbyID
+
     @Override
     public Adres findByReiziger(Reiziger reiziger) {
         String query = "Select * from adres where reiziger_id = ?";
@@ -87,7 +110,7 @@ public class AdresDAOPsql implements AdresDAO{
             pst.setInt(1,reiziger.getReiziger_id());
             ResultSet rs = pst.executeQuery();
             while(rs.next()){
-                adres = new Adres(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rdao.findById(rs.getInt(6)));
+                adres = new Adres(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),reiziger);
             }
         } catch (SQLException e) {
             e.printStackTrace();
