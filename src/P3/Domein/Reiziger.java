@@ -12,12 +12,13 @@ public class Reiziger {
 
     private Adres adres;
 
-    public Reiziger(int reiziger_id, String voorletters, String tussenvoegsel, String achternaam, Date geboortedatum){
+    public Reiziger(int reiziger_id, String voorletters, String tussenvoegsel, String achternaam, Date geboortedatum, Adres adres){
         this.reiziger_id = reiziger_id;
         this.voorletters = voorletters;
         this.tussenvoegsel = tussenvoegsel;
         this.achternaam = achternaam;
         this.geboortedatum = geboortedatum;
+        this.adres = adres;
     }
 
     public int getReiziger_id() {

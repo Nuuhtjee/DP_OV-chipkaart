@@ -16,6 +16,10 @@ public class ReizigerDAOPsql implements ReizigerDAO {
         this.conn = conn;
     }
 
+    public void setAdao(AdresDAOPsql adao ){
+        this.adao = adao;
+    }
+
     @Override
     public boolean save(Reiziger reiziger) {
         String query = "INSERT INTO reiziger (reiziger_id,voorletters,tussenvoegsel,achternaam,geboortedatum) VAlUES (?,?,?,?,?)";
@@ -76,7 +80,8 @@ public class ReizigerDAOPsql implements ReizigerDAO {
             pst.setInt(1,id);
             ResultSet rs = pst.executeQuery();
             while (rs.next()){
-                temp = new Reiziger(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getDate(5));
+                temp = new Reiziger(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getDate(5),null);
+                temp.setAdres(adao.findByReiziger(temp));
             }
         } catch (SQLException e) {
             System.out.println("Het vinden van een reiziger met het gegeven ID is mislukt");
@@ -93,7 +98,10 @@ public class ReizigerDAOPsql implements ReizigerDAO {
             pst.setDate(1,java.sql.Date.valueOf(datum));
             ResultSet rs = pst.executeQuery();
             while (rs.next()){
-                reizigers.add(new Reiziger(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getDate(5)));
+                Reiziger temp = new Reiziger(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getDate(5),null);
+                temp.setAdres(adao.findByReiziger(temp));
+                reizigers.add(temp);
+
             }
         } catch (SQLException e) {
             System.out.println("Het vinden van een reiziger met het gegeven geboortedatum is mislukt");
@@ -104,16 +112,15 @@ public class ReizigerDAOPsql implements ReizigerDAO {
 
     @Override
     public List<Reiziger> findAll() {
-        adao = new AdresDAOPsql(conn);
         String query = "SELECT * From reiziger";
         List<Reiziger> reizigers = new ArrayList<>();
         try {
             PreparedStatement pst = conn.prepareStatement(query);
             ResultSet rs = pst.executeQuery();
             while (rs.next()){
-                Reiziger temp = new Reiziger(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getDate(5));
+                Reiziger temp = new Reiziger(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getDate(5),null);
+                temp.setAdres(adao.findByReiziger(temp));
                 reizigers.add(temp);
-                adao.findByReiziger(temp);
             }
         } catch (SQLException e) {
             System.out.println("Het vinden van alle reizigers is mislukt");

@@ -16,10 +16,14 @@ public class Main {
         getConnection();
 
         ReizigerDAOPsql reizigerDAOPsql = new ReizigerDAOPsql(connection);
-        testReizigerDAO(reizigerDAOPsql);
-
         AdresDAOPsql adresDAOPsql = new AdresDAOPsql(connection);
+
+        reizigerDAOPsql.setAdao(adresDAOPsql);
+        adresDAOPsql.setRdao(reizigerDAOPsql);
+
+        testReizigerDAO(reizigerDAOPsql);
         testAdresDAO(adresDAOPsql, reizigerDAOPsql);
+
         closeConnection();
     }
 
@@ -55,7 +59,7 @@ public class Main {
 
         // Maak een nieuwe reiziger aan en persisteer deze in de database
         String gbdatum = "1981-03-14";
-        Reiziger sietske = new Reiziger(77, "S", "", "Boers", java.sql.Date.valueOf(gbdatum));
+        Reiziger sietske = new Reiziger(77, "S", "", "Boers", java.sql.Date.valueOf(gbdatum),null);
         System.out.print("[Test] Eerst " + AlleReizigers.size() + " reizigers, na ReizigerDAO.save() ");
         rdao.save(sietske);
         AlleReizigers = rdao.findAll();
@@ -111,7 +115,7 @@ public class Main {
 
         // Maak een nieuwe adres aan en persisteer deze in de database
         String gbdatum = "1970-03-11";
-        Reiziger tom = new Reiziger(8, "T", "van", "Schaars", java.sql.Date.valueOf(gbdatum));
+        Reiziger tom = new Reiziger(8, "T", "van", "Schaars", java.sql.Date.valueOf(gbdatum),null);
 
         rdao.save(tom);
         Adres tomadres = new Adres(8,"3451EE","12","Tomlaan","Amsterdam",tom);

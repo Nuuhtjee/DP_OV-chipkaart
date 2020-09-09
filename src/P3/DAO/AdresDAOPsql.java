@@ -17,9 +17,11 @@ public class AdresDAOPsql implements AdresDAO{
 
     public AdresDAOPsql(Connection conn){
         this.conn = conn;
-        this.rdao = new ReizigerDAOPsql(conn);
     }
 
+    public void setRdao(ReizigerDAO rdao) {
+        this.rdao = rdao;
+    }
 
     @Override
     public boolean save(Adres adres) {
