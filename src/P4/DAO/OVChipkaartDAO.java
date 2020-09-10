@@ -6,5 +6,10 @@ import P4.Domein.Reiziger;
 import java.util.List;
 
 public interface OVChipkaartDAO {
-    public OVChipkaart findByReiziger(List<Reiziger> reizigers);
+    public boolean save(OVChipkaart ovChipkaart);
+    public boolean update(OVChipkaart ovChipkaart);
+    public boolean delete(OVChipkaart ovChipkaart);
+    public List<OVChipkaart> findByReiziger(Reiziger reizigers);
+    public OVChipkaart findByOV(OVChipkaart ovChipkaart);
+    public List<OVChipkaart> findAll();
 }
