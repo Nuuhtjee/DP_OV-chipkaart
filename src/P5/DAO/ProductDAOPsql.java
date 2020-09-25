@@ -49,7 +49,7 @@ public class ProductDAOPsql implements ProductDAO{
         return result;
     }
 
-    //Moet nog
+    
     @Override
     public boolean update(Product product) {
         boolean result = false;
