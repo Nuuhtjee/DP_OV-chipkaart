@@ -49,12 +49,27 @@ public class ProductDAOPsql implements ProductDAO{
         return result;
     }
 
-    
+
     @Override
     public boolean update(Product product) {
         boolean result = false;
         String query = "UPDATE product SET product_nummer = ?, naam = ?, beschrijving = ?, prijs = ? WHERE product_nummer = ?";
+
+        String deletequery = "DELETE FROM ov_chipkaart_product where product_nummer = ?";
+        String insertQuery = "INSERT INTO ov_chipkaart_product (kaart_nummer,product_nummer) VALUES (?,?)";
+
         try {
+            PreparedStatement pstDelete = connection.prepareStatement(deletequery);
+            pstDelete.setInt(1,product.getProduct_nummer());
+            result = pstDelete.execute();
+
+            for (OVChipkaart ov : product.getOvChipkaarten()) {
+                PreparedStatement pstOV = connection.prepareStatement(insertQuery);
+                pstOV.setInt(1,ov.getKaartnummer());
+                pstOV.setInt(2,product.getProduct_nummer());
+                result = pstOV.execute();
+            }
+
             PreparedStatement pst = connection.prepareStatement(query);
             pst.setInt(1,product.getProduct_nummer());
             pst.setString(2,product.getNaam());

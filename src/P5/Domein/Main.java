@@ -255,6 +255,7 @@ public class Main {
         Reiziger reiziger = rdao.findById(2);
         List<OVChipkaart> ovChipkaart = odao.findByReiziger(reiziger);
         List<Product> producten = pdao.findByOVChipkaart(ovChipkaart.get(0));
+        Product product2 = pdao.findByNummer(2);
 
         for (Product prod: producten) {
             System.out.println(prod);
@@ -272,6 +273,24 @@ public class Main {
 
         System.out.println("[Test] Na pdao.update() heeft het de volgende waardes:");
         System.out.println(pdao.findByNummer(7));
+        System.out.println();
+
+//        Synchronizeren Test
+
+        System.out.println("[Test] Eerst " + " producten in de java list ");
+        System.out.println(producten);
+
+        producten.removeIf(product -> product.getProduct_nummer() == 2);
+        System.out.println("[Test] Na functie " + " producten in de java list ");
+        System.out.println(producten);
+
+        System.out.println("[Test] Eerst " + " producten in de Database");
+        System.out.println(pdao.findByOVChipkaart(ovChipkaart.get(0)));
+
+        pdao.update(product2);
+        
+        System.out.println("[Test] Na Update " + " producten in de Database");
+        System.out.println(pdao.findByOVChipkaart(ovChipkaart.get(0)));
         System.out.println();
 
         //Delete eerder gemaakte reiziger
